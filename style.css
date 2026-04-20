@@ -3,3 +3,23 @@
     height: 720px;
     border: 2px black solid;
 }
+
+.layout {
+    display: flex;
+
+
+}
+
+#sidebar {
+    width: 1000px;
+    padding: 10px;
+
+}
+
+.asset {
+    width: 100px;
+    margin-bottom: 10px;
+    cursor: grab;
+
+}
+
