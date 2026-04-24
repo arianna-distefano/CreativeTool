@@ -1,19 +1,20 @@
+
 const imgUpload = document.getElementById("img-upload");
 
-// Create stage (UNCHANGED)
+// CREATE STAGE
 const stage = new Konva.Stage({
     container: 'container',
     width: 1080,
     height: 720
 });
 
-// Create layer
+// CREATE LAYER
 const layer = new Konva.Layer();
 stage.add(layer);
 
-/////////////////////////////////////////////////////
-// ✅ ADD TRANSFORMER (THIS IS THE NEW PART)
-/////////////////////////////////////////////////////
+
+// STICKER TRANSFORMER
+
 const tr = new Konva.Transformer({
     rotateEnabled: true,
     enabledAnchors: [
@@ -23,7 +24,7 @@ const tr = new Konva.Transformer({
         'bottom-right'
     ],
     boundBoxFunc: function (oldBox, newBox) {
-        // prevent images from being too small
+        // prevent stickers from being too small
         if (newBox.width < 20 || newBox.height < 20) {
             return oldBox;
         }
@@ -33,9 +34,9 @@ const tr = new Konva.Transformer({
 
 layer.add(tr);
 
-/////////////////////////////////////////////////////
+
 // UPLOAD IMAGE
-/////////////////////////////////////////////////////
+
 imgUpload.addEventListener('change', function (e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -54,11 +55,11 @@ imgUpload.addEventListener('change', function (e) {
                 image: img,
                 width: stage.width(),
                 height: stage.height(),
-                draggable: false,   // ❌ cannot move
-                listening: false    // ❌ cannot be selected or clicked
+                draggable: false,
+                listening: false
             });
 
-            // Put it at the bottom
+            // set uploaded image as the background
             layer.add(background);
             background.moveToBottom();
 
@@ -69,18 +70,18 @@ imgUpload.addEventListener('change', function (e) {
     reader.readAsDataURL(file);
 });
 
-/////////////////////////////////////////////////////
-// SIDEBAR DRAG START
-/////////////////////////////////////////////////////
+
+// STICKER BAR
+
 document.querySelectorAll('.asset').forEach(img => {
     img.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('src', e.target.src);
     });
 });
 
-/////////////////////////////////////////////////////
-// DROP INTO CANVAS
-/////////////////////////////////////////////////////
+
+// DRAG STICKERS INTO CANVAS
+
 const container = document.getElementById('container');
 
 container.addEventListener('dragover', (e) => {
@@ -112,7 +113,7 @@ container.addEventListener('drop', (e) => {
             draggable: true
         });
 
-        // ✅ CLICK TO SELECT + RESIZE
+        // click to select sticker
         konvaImage.on('click', () => {
             tr.nodes([konvaImage]);
             layer.draw();
@@ -123,9 +124,9 @@ container.addEventListener('drop', (e) => {
     };
 });
 
-/////////////////////////////////////////////////////
-// CLICK EMPTY SPACE → DESELECT
-/////////////////////////////////////////////////////
+
+// CLICK EMPTY SPACE TO DESELECT STICKER
+
 stage.on('click', (e) => {
     if (e.target === stage) {
         tr.nodes([]);
