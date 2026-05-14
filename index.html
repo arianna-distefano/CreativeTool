@@ -6,6 +6,9 @@
     <title>Fuwakura</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
 
 
     <script src="https://unpkg.com/konva@10/konva.min.js"></script>
@@ -13,30 +16,51 @@
 </head>
 
 <body>
-<h1>Fuwakura !!</h1>
+<h1  class="chango-regular">Fuwakura !!</h1>
 
 <main>
+
     <div class="toolBar">
         <label for="img-upload">Upload Image</label>
         <input type="file" id="img-upload" accept="image/*">
     </div>
 
-    <div class="stageContainer">
-        <div id="container"></div>
-    </div>
-
+    <!-- EVERYTHING IN ONE FLEX ROW -->
     <div class="layout">
 
-        <!-- STICKERS -->
+
+        <!-- CANVAS -->
+        <div class="stageContainer">
+            <div id="container"></div>
+        </div>
+
+        <!-- INFO PANEL -->
+        <section class="infoPanel">
+            <p>
+                Welcome to Fuwakura !! A collaging creative tool made to help you increase the cuteness on your photos.
+                Please upload a photo you would like to up the cuteness level on !! Feel free to use as many stickers as you see
+                fit to help you reach your desired creation !!
+            </p>
+
+            <p>
+                Drag and drop stickers into the canvas
+                <p/>
+            <p>
+                crtl/cmd z to undo
+                <p/>
+            <p>
+                Press save when you’re ready
+            </p>
+        </section>
+        <!-- STICKERS SIDEBAR -->
         <section id="sidebar">
             <img src="https://files.catbox.moe/7wi6h3.png" class="asset" draggable="true">
             <img src="https://i.ibb.co/FkJXY0DB/kawaiieyes.png" class="asset" draggable="true">
-            <img src=https://i.ibb.co/LdQ6Hvsx/blush.png" class="asset" draggable="true">
+            <img src="https://i.ibb.co/LdQ6Hvsx/blush.png" class="asset" draggable="true">
         </section>
 
-
-
     </div>
+
 </main>
 
 </body>
